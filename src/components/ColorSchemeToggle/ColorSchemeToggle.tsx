@@ -1,13 +1,31 @@
-import { Button, Group, useMantineColorScheme } from '@mantine/core';
+import { FiMonitor, FiMoon, FiSun } from 'react-icons/fi';
+import { ActionIcon, MantineColorScheme, Tooltip, useMantineColorScheme } from '@mantine/core';
 
 export function ColorSchemeToggle() {
-  const { setColorScheme } = useMantineColorScheme();
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
+
+  const nextScheme = {
+    light: 'dark',
+    dark: 'auto',
+    auto: 'light',
+  }[colorScheme] as MantineColorScheme;
+
+  const icon = {
+    light: <FiSun />,
+    dark: <FiMoon />,
+    auto: <FiMonitor />,
+  }[colorScheme];
 
   return (
-    <Group justify="center" mt="xl">
-      <Button onClick={() => setColorScheme('light')}>Light</Button>
-      <Button onClick={() => setColorScheme('dark')}>Dark</Button>
-      <Button onClick={() => setColorScheme('auto')}>Auto</Button>
-    </Group>
+    <Tooltip label={`Switch to ${nextScheme} mode`} withArrow>
+      <ActionIcon
+        variant="default"
+        size="lg"
+        onClick={() => setColorScheme(nextScheme)}
+        aria-label="Toggle color scheme"
+      >
+        {icon}
+      </ActionIcon>
+    </Tooltip>
   );
 }

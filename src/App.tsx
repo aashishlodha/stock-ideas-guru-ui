@@ -1,13 +1,19 @@
 import '@mantine/core/styles.css';
 
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
-import { Router } from './Router';
+import AppRoutes from './routes/AppRoutes';
 import { theme } from './theme';
 
 export default function App() {
   return (
-    <MantineProvider theme={theme}>
-      <Router />
-    </MantineProvider>
+    <React.StrictMode>
+      <BrowserRouter>
+        <MantineProvider theme={theme}>
+          <AppRoutes />
+        </MantineProvider>
+      </BrowserRouter>
+    </React.StrictMode>
   );
 }
